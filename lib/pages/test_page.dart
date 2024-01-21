@@ -9,8 +9,9 @@ class TestPage extends StatefulWidget {
 }
                         // ใช้คู่กับ StatefulWidget
 class _TestPageState extends State<TestPage> {
-  var _text = 'Hello'; // state variable
-  var _icon = Icons.airlines;
+  var _text = ""; // state variable
+  //var _icon = Icons.airlines;
+  IconData? _icon;
 
   Widget buildItem(IconData icon, String label, Color color
       // {
@@ -20,11 +21,14 @@ class _TestPageState extends State<TestPage> {
       // }
       ) {
     return InkWell(
+      // botton
       onTap: () {
         setState(() {
           _text = label;
+          _icon = icon;
         });
       },
+
       child: Container(
         width: 100.0,
         padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -67,14 +71,23 @@ class _TestPageState extends State<TestPage> {
     ];
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(top: 50.0),
+        padding: EdgeInsets.only(top: 20.0),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            ElevatedButton(  //botton clear screen
+              onPressed: (){
+                setState(() {
+                  _text = "";
+                  _icon = null;
+                });
+              }, 
+              child: Text("Clear")),
             Expanded(
               child: Center(
 
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(_icon, size: 100.0),
                     Text(
@@ -85,7 +98,7 @@ class _TestPageState extends State<TestPage> {
                 ),
               ),
             ),
-          ],
+          
           Row(
               mainAxisAlignment: MainAxisAlignment.center, // left right
               //crossAxisAlignment: CrossAxisAlignment.start, // upper lower
